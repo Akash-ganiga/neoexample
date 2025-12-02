@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoExample Medical & Healthcare - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles for Home Page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Professional Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a6dbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+            color: #1a6dbb;
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu li a {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu li a:hover {
+            color: #1a6dbb;
+            background: rgba(26, 109, 187, 0.1);
+        }
+
+        .nav-menu li a.active {
+            color: #1a6dbb;
+            background: rgba(26, 109, 187, 0.15);
+        }
+
+        .nav-menu li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+            border-radius: 2px;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: #1a6dbb;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Professional Hero Slider */
+        .hero-slider {
+            margin-top: 70px;
+            position: relative;
+            height: 90vh;
+            min-height: 600px;
+            overflow: hidden;
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            animation: zoomEffect 15s ease infinite;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 77, 138, 0.85), rgba(26, 109, 187, 0.75));
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+            max-width: 900px;
+            width: 90%;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Company name in hero section */
+        .company-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .company-name::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 1px;
+        }
+
+        .slide-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            animation: slideInDown 1s ease;
+        }
+
+        .slide-content p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 300;
+            animation: slideInUp 1s ease 0.3s both;
+        }
+
+        .slide-content .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #1a6dbb;
+            text-decoration: none;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease 0.6s both;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-content .btn:hover {
+            background: #f8fbff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #1a6dbb;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider-btn:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .prev-btn {
+            left: 30px;
+        }
+
+        .next-btn {
+            right: 30px;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 3;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        /* Home Content Section */
+        .home-content {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,50 Q50,0 100,50 Q50,100 0,50" fill="%231a6dbb" opacity="0.03"/></svg>');
+            background-size: 300px;
+        }
+
+        .home-content h1 {
+            font-size: 3.5rem;
+            color: #0d4d8a;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .home-content h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+            border-radius: 2px;
+        }
+
+        .home-content > p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 25px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .home-content h2 {
+            font-size: 2.8rem;
+            color: #0d4d8a;
+            margin: 80px 0 50px;
+            text-align: center;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(26, 109, 187, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(26, 109, 187, 0.15);
+        }
+
+        .benefit-card i {
+            font-size: 3rem;
+            color: #1a6dbb;
+            margin-bottom: 25px;
+            transition: all 0.4s ease;
+        }
+
+        .benefit-card:hover i {
+            transform: scale(1.1);
+            color: #0d4d8a;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            color: #0d4d8a;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .benefit-card p {
+            color: #666;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, #1a6dbb 0%, #0d4d8a 100%);
+            padding: 100px 0;
+            border-radius: 30px;
+            margin: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.05"/></svg>');
+            background-size: cover;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+            padding: 100px 0;
+            text-align: center;
+            border-radius: 30px;
+            margin: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,50 Q50,0 100,50 Q50,100 0,50" fill="white" opacity="0.03"/></svg>');
+            background-size: 300px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.8rem;
+            color: #0d4d8a;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-btn {
+            padding: 18px 45px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-btn.primary {
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            color: white;
+            box-shadow: 0 10px 30px rgba(26, 109, 187, 0.3);
+        }
+
+        .cta-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(26, 109, 187, 0.4);
+        }
+
+        .cta-btn.secondary {
+            background: white;
+            color: #1a6dbb;
+            border: 2px solid #1a6dbb;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-btn.secondary:hover {
+            background: #1a6dbb;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #0d4d8a 0%, #1a3a5f 100%);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.03"/></svg>');
+            background-size: cover;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .footer-section p, .footer-section li {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-section i {
+            margin-right: 12px;
+            color: #4a9de3;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: white;
+            color: #1a6dbb;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes zoomEffect {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero-slider {
+                height: 80vh;
+                min-height: 500px;
+            }
+            
+            .slide-content h2 {
+                font-size: 2.8rem;
+            }
+            
+            .slide-content p {
+                font-size: 1.2rem;
+            }
+            
+            .company-name {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                transition: right 0.5s ease;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                padding: 100px 0;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li a {
+                font-size: 1.2rem;
+                padding: 12px 24px;
+            }
+            
+            .hero-slider {
+                height: 70vh;
+                min-height: 400px;
+                border-radius: 0 0 30px 30px;
+            }
+            
+            .slide-content {
+                padding: 30px 20px;
+            }
+            
+            .slide-content h2 {
+                font-size: 2.2rem;
+            }
+            
+            .slide-content p {
+                font-size: 1.1rem;
+            }
+            
+            .company-name {
+                font-size: 1.4rem;
+            }
+            
+            .slider-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 1.2rem;
+                background-color: transparent;
+            }
+            
+            .home-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .home-content h2 {
+                font-size: 2.2rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.4rem;
+            }
+            
+            .nav-menu {
+                width: 100%;
+            }
+            
+            .hero-slider {
+                height: 60vh;
+                min-height: 350px;
+                border-radius: 0 0 20px 20px;
+            }
+            
+            .slide-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .slide-content p {
+                font-size: 1rem;
+            }
+            
+            .company-name {
+                font-size: 1.2rem;
+            }
+            
+            .slide-content .btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .home-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .home-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .stat-number {
+                font-size: 2.8rem;
+            }
+            
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+            
+            .benefit-card {
+                padding: 30px 20px;
+            }
+            
+            .stats-section, .cta-section {
+                padding: 70px 0;
+                margin: 70px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span class="logo-text">NeoExample</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="services.html">Medical & Healthcare</a></li>
+                <li><a href="global.html">Global Services</a></li>
+                <li><a href="training.html">Training & Jobs</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Slider -->
+    <section class="hero-slider">
+        <div class="slider-container">
+            <div class="slide active">
+                <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&h=800&q=80')"></div>
+                <div class="slide-content">
+                    <div class="company-name">NeoExample Medical & Healthcare</div>
+                    <h2>Professional Homecare Services</h2>
+                    <p>Personalized medical care in the comfort of your home by certified professionals</p>
+                    <a href="services.html" class="btn">Explore Our Services</a>
+                </div>
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide">
+                <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&h=800&q=80')"></div>
+                <div class="slide-content">
+                    <div class="company-name">NeoExample Medical & Healthcare</div>
+                    <h2>Qualified Medical Staff</h2>
+                    <p>Certified Nurses, Physiotherapists, and Caregivers delivered to your doorstep</p>
+                    <a href="services.html" class="btn">Meet Our Team</a>
+                </div>
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide">
+                <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&h=800&q=80')"></div>
+                <div class="slide-content">
+                    <div class="company-name">NeoExample Medical & Healthcare</div>
+                    <h2>Global Opportunities</h2>
+                    <p>Connecting Indian healthcare professionals with prestigious international opportunities</p>
+                    <a href="global.html" class="btn">Discover Opportunities</a>
+                </div>
+                <div class="slide-overlay"></div>
+            </div>
+            <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            <div class="slider-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Home Content -->
+    <section class="home-content">
+        <div class="container">
+            <h1>Premium Homecare Services</h1>
+            <p>Homecare services represent the future of healthcare, offering essential medical assistance to patients who prefer receiving care in the comfort and privacy of their own homes. Our comprehensive approach ensures personalized treatment tailored to individual needs.</p>
+            
+            <p>We specialize in serving individuals with chronic conditions, elderly patients, and those requiring post-operative care, significantly improving quality of life while reducing the burden of prolonged hospital stays.</p>
+            
+            <p>Our team of trained medical professionals collaborates with patients to develop comprehensive care plans addressing their unique medical requirements and personal preferences, ensuring holistic wellbeing.</p>
+            <h2>Why Choose Homecare?</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-home"></i>
+                    <h3>Convenience & Comfort</h3>
+                    <p>Receive healthcare services in the familiar and comfortable environment of your own home, eliminating travel stress.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-user-md"></i>
+                    <h3>Personalized Care</h3>
+                    <p>Customized treatment plans designed specifically for your unique medical needs and personal preferences.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-rupee-sign"></i>
+                    <h3>Cost Effective</h3>
+                    <p>Significantly more affordable than extended hospital stays while maintaining exceptional quality of care.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-user-check"></i>
+                    <h3>Enhanced Independence</h3>
+                    <p>Promote independent living while receiving professional medical support in your preferred environment.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Continuity of Care</h3>
+                    <p>Consistent medical supervision reduces complications and ensures proper recovery monitoring.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Family Support</h3>
+                    <p>Professional caregiving support provides relief for family members while ensuring expert patient care.</p>
+                </div>
+            </div>
+            
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2>Ready to Experience Premium Homecare?</h2>
+                <p>Contact us today to schedule a consultation or learn more about our comprehensive healthcare solutions.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="cta-btn primary">
+                        <i class="fas fa-calendar-check"></i> Book Consultation
+                    </a>
+                    <a href="services.html" class="cta-btn secondary">
+                        <i class="fas fa-phone-alt"></i> Contact Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NeoExample Medical & Healthcare</h3>
+                    <p>Leading provider of premium homecare services and healthcare staffing solutions with certified professionals and advanced medical protocols.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Medical Services</a></li>
+                        <li><a href="global.html">Global Services</a></li>
+                        <li><a href="training.html">Training Programs</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Reg Office: 230, 17 B Main, Bengaluru 560102</p>
+                    <p><i class="fas fa-envelope"></i> NeoExamplemhc@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                    <p><i class="fas fa-globe"></i> www.NeoExample.in</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> NeoExample Medical & Healthcare. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-menu li a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Hero Slider Functionality
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            let currentSlide = 0;
+            const slideInterval = 5000; // 5 seconds
+
+            function showSlide(n) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                currentSlide = (n + slides.length) % slides.length;
+                
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+
+            function prevSlide() {
+                showSlide(currentSlide - 1);
+            }
+
+            // Event Listeners
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => showSlide(index));
+            });
+
+            // Auto slide
+            let slideTimer = setInterval(nextSlide, slideInterval);
+
+            // Pause on hover
+            const sliderContainer = document.querySelector('.slider-container');
+            sliderContainer.addEventListener('mouseenter', () => {
+                clearInterval(slideTimer);
+            });
+
+            sliderContainer.addEventListener('mouseleave', () => {
+                clearInterval(slideTimer);
+                slideTimer = setInterval(nextSlide, slideInterval);
+            });
+
+            // Stats Counter Animation
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            function animateCounter(element) {
+                const target = parseInt(element.getAttribute('data-count'));
+                const duration = 2000; // 2 seconds
+                const increment = target / (duration / 16); // 60fps
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = target + element.textContent.slice(target.toString().length);
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current) + element.textContent.slice(Math.floor(current).toString().length);
+                    }
+                }, 16);
+            }
+
+            // Animate counters when in view
+            function checkCounters() {
+                statNumbers.forEach(stat => {
+                    const rect = stat.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100 && !stat.classList.contains('animated')) {
+                        stat.classList.add('animated');
+                        animateCounter(stat);
+                    }
+                });
+            }
+
+            // Animate elements on scroll
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.benefit-card, .stat-item, .cta-section');
+                
+                elements.forEach(element => {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+                
+                checkCounters();
+            }
+
+            // Initialize animations
+            document.querySelectorAll('.benefit-card, .stat-item, .cta-section').forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+
+            // Initial check
+            animateOnScroll();
+            window.addEventListener('scroll', animateOnScroll);
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoExample Medical & Healthcare Services</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Common Background for all pages */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Professional Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a6dbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+            color: #1a6dbb;
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu li a {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu li a:hover {
+            color: #1a6dbb;
+            background: rgba(26, 109, 187, 0.1);
+        }
+
+        .nav-menu li a.active {
+            color: #1a6dbb;
+            background: rgba(26, 109, 187, 0.15);
+        }
+
+        .nav-menu li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+            border-radius: 2px;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: #1a6dbb;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section with Rounded Bottom - FIXED: Remove margin-top */
+        .services-hero {
+            background: linear-gradient(rgba(30, 136, 229, 0.92), rgba(25, 118, 210, 0.92)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&h=700&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 120px 0 80px;
+            margin-top: 70px; /* Match training page margin */
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 40px 40px;
+        }
+
+        .services-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.05"/></svg>');
+            background-size: cover;
+            border-radius: inherit;
+        }
+
+        .services-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .services-hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            position: relative;
+        }
+
+        /* Introduction Section - Adjusted margin */
+        .intro-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+            position: relative;
+            overflow: hidden;
+            border-radius: 30px;
+            margin: -60px 0 100px; /* Reduced negative margin */
+            box-shadow: 0 30px 60px rgba(26, 109, 187, 0.1);
+        }
+
+        .intro-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,50 Q50,0 100,50 Q50,100 0,50" fill="white" opacity="0.03"/></svg>');
+            background-size: 300px;
+        }
+
+        .intro-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .intro-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            box-shadow: 0 15px 30px rgba(26, 109, 187, 0.3);
+            transform: translateY(0);
+            transition: all 0.4s ease;
+        }
+
+        .intro-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(26, 109, 187, 0.4);
+        }
+
+        .intro-badge i {
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .intro-description {
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(26, 109, 187, 0.1);
+            text-align: left;
+        }
+
+        .intro-description h2 {
+            color: #0d4d8a;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .intro-description p {
+            color: #555;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        /* Services Section */
+        .services-section {
+            background: white;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title h2 {
+            color: #0d4d8a;
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 30px auto 0;
+            line-height: 1.6;
+        }
+
+        /* Services Grid - Adjusted to 1 column per row */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(26, 109, 187, 0.1);
+            height: 100%;
+            position: relative;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 35px 70px rgba(26, 109, 187, 0.15);
+        }
+
+        .service-header {
+            padding: 35px 35px 25px;
+            background: #f8fbff;
+        }
+
+        .service-header h3 {
+            color: #0d4d8a;
+            font-size: 1.8rem;
+            margin: 0 0 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .service-header h3 i {
+            margin-right: 15px;
+            color: #1a6dbb;
+            font-size: 1.8rem;
+        }
+
+        .service-header p {
+            color: #666;
+            margin: 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .service-content {
+            padding: 0 35px 35px;
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-list li {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            display: flex;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(26, 109, 187, 0.1);
+        }
+
+        .service-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .service-list li::before {
+            content: '▸';
+            color: #1a6dbb;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* Image with Caption */
+        .image-with-caption {
+            margin: 80px auto;
+            max-width: 1200px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .services-image {
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .services-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+
+        .services-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-style: italic;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose-section {
+            background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+            margin: 100px 0;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(26, 109, 187, 0.1);
+        }
+
+        .why-choose-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,50 Q50,0 100,50 Q50,100 0,50" fill="white" opacity="0.03"/></svg>');
+            background-size: 300px;
+        }
+
+        .why-choose-section .section-title {
+            position: relative;
+            z-index: 1;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .why-item {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.5s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(26, 109, 187, 0.1);
+            position: relative;
+        }
+
+        .why-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            border-radius: inherit;
+            z-index: 1;
+        }
+
+        .why-item:hover::before {
+            opacity: 0.05;
+        }
+
+        .why-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(26, 109, 187, 0.15);
+        }
+
+        .why-item i {
+            font-size: 2.5rem;
+            color: #1a6dbb;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .why-item:hover i {
+            transform: scale(1.1);
+            color: #0d4d8a;
+        }
+
+        .why-item h4 {
+            color: #0d4d8a;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .why-item p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            background: linear-gradient(135deg, #1a6dbb 0%, #0d4d8a 100%);
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 30px;
+            margin: 100px 0;
+            box-shadow: 0 30px 60px rgba(26, 109, 187, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.05"/></svg>');
+            background-size: cover;
+        }
+
+        .contact-cta h3 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-cta p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            background: white;
+            color: #1a6dbb;
+            padding: 20px 45px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-btn:hover {
+            background: #f8fbff;
+            transform: translateY(-5px);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-btn i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #0d4d8a 0%, #1a3a5f 100%);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.03"/></svg>');
+            background-size: cover;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .footer-section p, .footer-section li {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-section i {
+            margin-right: 12px;
+            color: #4a9de3;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: white;
+            color: #1a6dbb;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                transition: right 0.5s ease;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                padding: 100px 0;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li a {
+                font-size: 1.2rem;
+                padding: 12px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                width: 100%;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .why-grid {
+                max-width: 1000px;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .intro-section {
+                margin: -40px 20px 80px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .services-hero {
+                padding: 120px 0 60px; /* Adjusted padding */
+                border-radius: 0 0 30px 30px;
+            }
+
+            .services-hero h1 {
+                font-size: 3.2rem;
+            }
+
+            .services-hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+
+            .services-grid {
+                max-width: 600px;
+            }
+
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 600px;
+            }
+
+            .services-image img {
+                height: 350px;
+            }
+
+            .intro-section {
+                margin: -30px 0 80px;
+            }
+
+            .intro-description {
+                padding: 40px;
+            }
+
+            .intro-description h2 {
+                font-size: 2.2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services-hero {
+                border-radius: 0 0 25px 25px;
+            }
+
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .services-hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+
+            .section-title p {
+                font-size: 1.1rem;
+            }
+
+            .service-header {
+                padding: 30px 30px 20px;
+            }
+
+            .service-content {
+                padding: 0 30px 30px;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .why-item {
+                padding: 30px 20px;
+            }
+
+            .contact-cta {
+                padding: 60px 20px;
+            }
+
+            .contact-cta h3 {
+                font-size: 2rem;
+            }
+
+            .intro-description {
+                padding: 30px 20px;
+            }
+
+            .intro-description h2 {
+                font-size: 1.8rem;
+            }
+
+            .intro-badge {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .services-hero {
+                padding: 100px 0 40px; /* Adjusted padding */
+                border-radius: 0 0 20px 20px;
+            }
+
+            .services-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .service-header h3 {
+                font-size: 1.5rem;
+            }
+
+            .service-list li {
+                font-size: 1rem;
+            }
+
+            .why-item h4 {
+                font-size: 1.2rem;
+            }
+
+            .services-image img {
+                height: 250px;
+            }
+
+            .image-caption {
+                padding: 20px;
+                font-size: 1.1rem;
+            }
+
+            .cta-btn {
+                padding: 18px 30px;
+                font-size: 1.1rem;
+            }
+
+            .intro-badge {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .services-hero {
+                padding: 90px 0 40px; /* Adjusted padding */
+                border-radius: 0 0 20px 20px;
+            }
+
+            .services-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .service-header {
+                padding: 25px 20px 15px;
+            }
+
+            .service-content {
+                padding: 0 20px 25px;
+            }
+
+            .service-list li {
+                font-size: 0.95rem;
+            }
+
+            .why-item {
+                padding: 25px 15px;
+            }
+
+            .contact-cta h3 {
+                font-size: 1.6rem;
+            }
+
+            .intro-badge {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .intro-badge i {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .intro-description p {
+                font-size: 1.1rem;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span class="logo-text">NeoExample</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html" class="active">Medical & Healthcare</a></li>
+                <li><a href="global.html">Global Services</a></li>
+                <li><a href="training.html">Training & Jobs</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Services Hero Section - FIXED: No gap with navbar -->
+    <section class="services-hero">
+        <div class="container">
+            <h1>NeoExample Medical & Healthcare</h1>
+            <p>Premium healthcare staffing and comprehensive homecare services at your doorstep</p>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <div class="intro-content">
+            <div class="intro-badge">
+                <i class="fas fa-heartbeat"></i>
+                <span>Your Trusted Healthcare Partner</span>
+            </div>
+            
+            <div class="intro-description">
+                <h2>Professional Healthcare Solutions</h2>
+                <p>NeoExample Medical & Healthcare is a Bengaluru-based startup led by experienced entrepreneurs in HR, Training, Healthcare, and Travel. We specialize in providing comprehensive healthcare staffing solutions and personalized homecare services.</p>
+                
+                <p>Our mission is to bridge the gap between qualified healthcare professionals and those in need of medical assistance, whether in hospitals, care centers, or the comfort of home. We cater to individuals with chronic conditions, the elderly, and post-operative patients, enhancing their quality of life through personalized care.</p>
+                
+                <p>With NeoExample, you get access to verified doctors, nursing staff, physiotherapists, caregivers, and attendants – all delivered to your doorstep with professionalism and compassion.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Specialized Services</h2>
+                <p>Comprehensive healthcare solutions tailored to your needs</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Nurses for Hospitals -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <h3><i class="fas fa-hospital"></i> Nurses for Hospitals</h3>
+                        <p>Qualified nursing staff for hospital requirements including ICU, wards, and specialty departments.</p>
+                    </div>
+                    <div class="service-content">
+                        <!-- Subpoints removed as requested -->
+                    </div>
+                </div>
+                
+                <!-- Physiotherapists -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <h3><i class="fas fa-user-md"></i> Physiotherapists for Hospital & Homecare</h3>
+                        <p>Professional physiotherapy services for rehabilitation and mobility improvement.</p>
+                    </div>
+                    <div class="service-content">
+                        <!-- Subpoints removed as requested -->
+                    </div>
+                </div>
+                
+                <!-- Nurses for Homecare -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <h3><i class="fas fa-home"></i> Nurses for Homecare</h3>
+                        <p>Professional nursing care delivered to your home with medical expertise.</p>
+                    </div>
+                    <div class="service-content">
+                        <ul class="service-list">
+                            <li>ICU Care at Home</li>
+                            <li>Patient Care & Monitoring</li>
+                            <li>IM, IV & Vitals Monitoring</li>
+                            <li>Medicine Administration</li>
+                            <li>Chronic Illness Management</li>
+                            <li>Critical Illness Care</li>
+                            <li>Oncology Care Support</li>
+                            <li>Isolation Care Services</li>
+                            <li>Stoma Care Management</li>
+                            <li>Neonatal & Postnatal Care</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Caregivers & Attenders -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <h3><i class="fas fa-hands-helping"></i> Caregivers & Attenders</h3>
+                        <p>Compassionate support for hospitals and homecare patients.</p>
+                    </div>
+                    <div class="service-content">
+                        <ul class="service-list">
+                            <li>Elder Care Services</li>
+                            <li>Mother & Baby Care</li>
+                            <li>Patient Support & Assistance</li>
+                            <li>Post-operative Basic Support</li>
+                            <li>Assisted Living Services</li>
+                            <li>Daily Activity Assistance</li>
+                            <li>Meal Preparation Help</li>
+                            <li>Mobility Support</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Care-on-Wheels -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <h3><i class="fas fa-ambulance"></i> Care-on-Wheels</h3>
+                        <p>Mobile healthcare services delivered to your location.</p>
+                    </div>
+                    <div class="service-content">
+                        <ul class="service-list">
+                            <li>IV Infusion & IM Injection</li>
+                            <li>Vitals Check-up Services</li>
+                            <li>Medicine Administration</li>
+                            <li>Sample Collection</li>
+                            <li>Mobile Physiotherapy</li>
+                            <li>Wound Care Management</li>
+                            <li>Nebulization Services</li>
+                            <li>Emergency Care Support</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Doctor Consultation removed as requested -->
+            </div>
+            
+            <!-- Image with Caption -->
+            <div class="image-with-caption">
+                <div class="services-image">
+                    <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=450&q=80" 
+                         alt="Professional Healthcare Team" 
+                         loading="lazy">
+                    <div class="image-caption">Our Team of Certified Healthcare Professionals</div>
+                </div>
+            </div>
+            
+            <!-- Why Choose Us Section -->
+            <div class="why-choose-section">
+                <div class="section-title">
+                    <h2>Why Choose NeoExample?</h2>
+                    <p>Experience the difference with our premium healthcare services</p>
+                </div>
+                
+                <div class="why-grid">
+                    <div class="why-item">
+                        <i class="fas fa-user-md"></i>
+                        <h4>Qualified Team</h4>
+                        <p>Certified professionals with extensive healthcare expertise</p>
+                    </div>
+                    
+                    <div class="why-item">
+                        <i class="fas fa-rupee-sign"></i>
+                        <h4>Cost Effective</h4>
+                        <p>Affordable care without compromising quality standards</p>
+                    </div>
+                    
+                    <div class="why-item">
+                        <i class="fas fa-window-restore"></i>
+                        <h4>Complete Solution</h4>
+                        <p>End-to-end healthcare services under one roof</p>
+                    </div>
+                    
+                    <div class="why-item">
+                        <i class="fas fa-users"></i>
+                        <h4>Talent Pool Access</h4>
+                        <p>Verified professionals with continuous training</p>
+                    </div>
+                    
+                    <div class="why-item">
+                        <i class="fas fa-clock"></i>
+                        <h4>Quick Response</h4>
+                        <p>Rapid service deployment and support</p>
+                    </div>
+                    
+                    <div class="why-item">
+                        <i class="fas fa-cogs"></i>
+                        <h4>Professional Management</h4>
+                        <p>Managed by healthcare industry experts</p>
+                    </div>
+                    
+                    <div class="why-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Quality Assurance</h4>
+                        <p>Rigorous quality checks and monitoring</p>
+                    </div>
+                    
+                    <div class="why-item">
+                        <i class="fas fa-laptop-medical"></i>
+                        <h4>Digital Integration</h4>
+                        <p>Technology-enabled tracking and reporting</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact CTA -->
+            <div class="contact-cta">
+                <h3>Need Professional Healthcare Services?</h3>
+                <p>Contact us today to get quality healthcare professionals at your doorstep or healthcare facility.</p>
+                <a href="contact.html" class="cta-btn">
+                    <i class="fas fa-paper-plane"></i> Request Service Now
+                </a>
+            </div>
+            
+            <!-- Second Image -->
+            <div class="image-with-caption">
+                <div class="services-image">
+                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=450&q=80" 
+                         alt="Home Healthcare Services" 
+                         loading="lazy">
+                    <div class="image-caption">Quality Care in the Comfort of Your Home</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NeoExample Medical & Healthcare</h3>
+                    <p>Leading provider of premium homecare services and healthcare staffing solutions with certified professionals and advanced medical protocols.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Medical Services</a></li>
+                        <li><a href="global.html">Global Services</a></li>
+                        <li><a href="training.html">Training Programs</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Reg Office: 230, 17 B Main, Bengaluru 560102</p>
+                    <p><i class="fas fa-envelope"></i> NeoExamplemhc@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                    <p><i class="fas fa-globe"></i> www.NeoExample.in</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> NeoExample Medical & Healthcare. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-menu li a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Add animation to elements when they come into view
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.service-card, .why-item, .services-image, .intro-description');
+                
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+
+            // Initialize opacity for animation
+            document.querySelectorAll('.service-card, .why-item, .services-image, .intro-description').forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+
+            // Contact button animation
+            const ctaBtn = document.querySelector('.cta-btn');
+            if (ctaBtn) {
+                ctaBtn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                ctaBtn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            }
+
+            // Intro badge animation
+            const introBadge = document.querySelector('.intro-badge');
+            if (introBadge) {
+                introBadge.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                introBadge.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            }
+
+            // Initial check and scroll listener
+            animateOnScroll();
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>

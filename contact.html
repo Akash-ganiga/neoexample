@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - NeoExample Medical & Healthcare</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- ADD THE SAME FONT IMPORTS AS services.html -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+      /* Common Background for all pages */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Professional Navigation - EXACT COPY from services.html */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a6dbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+            color: #1a6dbb;
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        /* EXACTLY like services.html */
+        .nav-menu li a {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu li a:hover {
+            color: #1a6dbb;
+            background: rgba(26, 109, 187, 0.1);
+        }
+
+        .nav-menu li a.active {
+            color: #1a6dbb;
+            background: rgba(26, 109, 187, 0.15);
+        }
+
+        .nav-menu li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+            border-radius: 2px;
+        }
+
+        /* Hamburger Menu - EXACTLY like services.html */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: #1a6dbb;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Mobile Menu Styles - EXACTLY like services.html */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                transition: right 0.5s ease;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                padding: 100px 0;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li a {
+                padding: 12px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                width: 100%;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* REST OF THE CONTACT PAGE STYLES REMAIN UNCHANGED */
+        .contact-hero {
+            background: linear-gradient(rgba(30, 136, 229, 0.92), rgba(25, 118, 210, 0.92)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&h=700&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 100px 0 80px;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.05"/></svg>');
+            background-size: cover;
+        }
+
+        .contact-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .contact-hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            position: relative;
+        }
+
+        /* UPDATED: 2x2 Contact Grid */
+        .contact-section {
+            background: white;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title h2 {
+            color: #1565c0;
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #1e88e5, #64b5f6);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 30px auto 0;
+            line-height: 1.6;
+        }
+
+        /* UPDATED: 2x2 Grid Layout */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(30, 136, 229, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #1e88e5, #64b5f6);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 35px 70px rgba(30, 136, 229, 0.15);
+        }
+
+        .contact-card:nth-child(1):hover { border-color: #1e88e5; }
+        .contact-card:nth-child(2):hover { border-color: #64b5f6; }
+        .contact-card:nth-child(3):hover { border-color: #42a5f5; }
+        .contact-card:nth-child(4):hover { border-color: #2196f3; }
+
+        .contact-icon {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #1e88e5, #64b5f6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.5s ease;
+            box-shadow: 0 12px 30px rgba(30, 136, 229, 0.2);
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 35px rgba(30, 136, 229, 0.3);
+        }
+
+        .contact-card h3 {
+            color: #1565c0;
+            font-size: 1.7rem;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .contact-card p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            padding: 15px;
+            background: #f8fbff;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            width: 100%;
+            border: 1px solid rgba(30, 136, 229, 0.1);
+        }
+
+        .contact-info-item:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(30, 136, 229, 0.1);
+        }
+
+        .contact-info-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: #1e88e5;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info-text {
+            text-align: left;
+            flex: 1;
+        }
+
+        .contact-info-text h4 {
+            color: #1565c0;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .contact-info-text p {
+            color: #666;
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* UPDATED: Professional Contact Form */
+        .contact-form-section {
+            background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,50 Q50,0 100,50 Q50,100 0,50" fill="white" opacity="0.03"/></svg>');
+            background-size: 300px;
+        }
+
+        .contact-form-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Form Styling */
+        .form-container {
+            background: white;
+            padding: 60px;
+            border-radius: 25px;
+            box-shadow: 0 30px 60px rgba(30, 136, 229, 0.15);
+            border: 1px solid rgba(30, 136, 229, 0.1);
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #1e88e5, #64b5f6);
+            border-radius: 25px 25px 0 0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 12px;
+            color: #1565c0;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 18px 25px;
+            border: 2px solid #e3f2fd;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            background: #f8fbff;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #1e88e5;
+            box-shadow: 0 0 0 4px rgba(30, 136, 229, 0.1);
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .form-control::placeholder {
+            color: #90a4ae;
+        }
+
+        .form-icon {
+            position: absolute;
+            right: 20px;
+            top: 48px;
+            color: #1e88e5;
+            font-size: 1.2rem;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%231e88e5' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 16px;
+            padding-right: 50px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #1e88e5;
+            border-radius: 6px;
+            cursor: pointer;
+            accent-color: #1e88e5;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            color: #555;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #1e88e5, #64b5f6);
+            color: white;
+            border: none;
+            padding: 20px 45px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: block;
+            width: 100%;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 12px 25px rgba(30, 136, 229, 0.2);
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #1565c0, #1e88e5);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 35px rgba(30, 136, 229, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+        }
+
+        /* NEW: Contact Methods Section */
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .method-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(30, 136, 229, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #1e88e5, #64b5f6);
+        }
+
+        .method-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(30, 136, 229, 0.15);
+        }
+
+        .method-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #1e88e5, #64b5f6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+            color: white;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(30, 136, 229, 0.2);
+        }
+
+        .method-card:hover .method-icon {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(30, 136, 229, 0.3);
+        }
+
+        .method-card h3 {
+            color: #1565c0;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .method-card p {
+            color: #555;
+            line-height: 1.6;
+            margin: 0 0 20px 0;
+            font-size: 1.05rem;
+        }
+
+        .method-details {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .method-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f8fbff;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .method-detail:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+
+        .method-detail i {
+            color: #1e88e5;
+            margin-right: 12px;
+            font-size: 1.1rem;
+            width: 25px;
+        }
+
+        .method-detail span {
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Map Section */
+        .map-section {
+            background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .map-wrapper {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        .office-locations {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .office-card {
+            background: white;
+            padding: 40px 35px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(30, 136, 229, 0.1);
+            position: relative;
+        }
+
+        .office-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1e88e5, #64b5f6);
+        }
+
+        .office-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(30, 136, 229, 0.15);
+        }
+
+        .office-card h3 {
+            color: #1565c0;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .office-card h3 i {
+            margin-right: 12px;
+            color: #1e88e5;
+            font-size: 1.3rem;
+        }
+
+        .office-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8fbff;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .office-detail:hover {
+            background: #e3f2fd;
+        }
+
+        .office-detail i {
+            color: #1e88e5;
+            margin-right: 15px;
+            font-size: 1.1rem;
+            margin-top: 2px;
+        }
+
+        .office-detail strong {
+            color: #1565c0;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .office-detail span {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Social Media Section - UPDATED to remove underline */
+        .social-section {
+            background: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .social-icons-large {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon-large {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #1e88e5;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e3f2fd;
+            text-decoration: none !important; /* Remove underline */
+        }
+
+        .social-icon-large:hover {
+            transform: translateY(-10px) scale(1.1);
+            color: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            text-decoration: none !important; /* Ensure no underline on hover */
+        }
+
+        .social-icon-large.facebook:hover { background: #1877f2; border-color: #1877f2; }
+        .social-icon-large.twitter:hover { background: #1da1f2; border-color: #1da1f2; }
+        .social-icon-large.linkedin:hover { background: #0077b5; border-color: #0077b5; }
+        .social-icon-large.instagram:hover { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); border-color: transparent; }
+        .social-icon-large.youtube:hover { background: #ff0000; border-color: #ff0000; }
+
+        .social-handle {
+            margin-top: 40px;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .social-handle strong {
+            color: #1565c0;
+            font-weight: 700;
+        }
+
+        /* NEW: Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #1565c0 0%, #1e88e5 100%);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,100 L100,0 L100,100 Z" fill="white" opacity="0.05"/></svg>');
+            background-size: cover;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-section h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #64b5f6;
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section ul li a:hover {
+            color: #64b5f6;
+            transform: translateX(5px);
+        }
+
+        .footer-section ul li a i {
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .footer-bottom .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-bottom .social-icons a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .footer-bottom .social-icons a:hover {
+            background: white;
+            color: #1e88e5;
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design - REST OF THE PAGE STYLES */
+        @media (max-width: 1200px) {
+            .contact-grid,
+            .office-locations,
+            .contact-methods {
+                max-width: 1000px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .contact-hero {
+                padding: 100px 0 60px;
+            }
+
+            .contact-hero h1 {
+                font-size: 3.2rem;
+            }
+
+            .contact-hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+
+            .contact-grid,
+            .office-locations,
+            .contact-methods {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+
+            .form-container {
+                padding: 40px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+
+            .section-title p {
+                font-size: 1.1rem;
+            }
+
+            .contact-card,
+            .office-card,
+            .method-card {
+                padding: 35px 25px;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+
+            .form-control {
+                padding: 15px 20px;
+            }
+
+            .form-icon {
+                top: 43px;
+                right: 15px;
+            }
+
+            .social-icon-large {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-hero {
+                padding: 80px 0 40px;
+            }
+
+            .contact-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .contact-icon,
+            .method-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+
+            .contact-info-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .contact-info-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .contact-info-text {
+                text-align: center;
+            }
+
+            .office-detail {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .office-detail i {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .social-icon-large {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .contact-card,
+            .office-card,
+            .method-card {
+                padding: 25px 15px;
+            }
+
+            .form-container {
+                padding: 20px 15px;
+            }
+
+            .submit-btn {
+                padding: 18px 25px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation - EXACTLY like services.html -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span class="logo-text">NeoExample</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Medical & Healthcare</a></li>
+                <li><a href="global.html">Global Services</a></li>
+                <li><a href="training.html">Training & Jobs</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- REST OF THE CONTACT PAGE REMAINS THE SAME -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Get In Touch With Us</h1>
+            <p>We're here to help. Reach out to us for any healthcare service inquiries, career opportunities, or partnership discussions.</p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Information</h2>
+                <p>Multiple ways to connect with our healthcare team</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Phone Support</h3>
+                    <p>Speak directly with our healthcare specialists</p>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="contact-info-text">
+                            <h4>General Inquiries</h4>
+                            <p>+91 80 1234 5678</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-info-text">
+                            <h4>Available Hours</h4>
+                            <p>Mon-Fri: 9 AM - 6 PM | Sat: 10 AM - 4 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email & Digital</h3>
+                    <p>Connect with us through digital channels</p>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-at"></i>
+                        </div>
+                        <div class="contact-info-text">
+                            <h4>Primary Email</h4>
+                            <p>info@neoexample.in</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-info-text">
+                            <h4>Website</h4>
+                            <p>www.NeoExample.in</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Registered Office</h3>
+                    <p>Our corporate headquarters in Bengaluru</p>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="contact-info-text">
+                            <h4>Address</h4>
+                            <p>230, 17 B Main, Koramangala, Bengaluru 560102</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Work Office</h3>
+                    <p>Our operational center for daily activities</p>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-location-dot"></i>
+                        </div>
+                        <div class="contact-info-text">
+                            <h4>Address</h4>
+                            <p>167/1/1, 13th Main, HSR Layout, Bengaluru 560052</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+        </div>
+    </section>
+
+    <!-- Rest of the contact form and other sections remain exactly the same -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Send Us a Message</h2>
+                <p>Fill out the form below and our healthcare team will get back to you within 24 hours.</p>
+            </div>
+
+            <div class="contact-form-container">
+                <div class="form-container">
+                    <form action="https://api.web3forms.com/submit" method="POST">
+
+                        <input type="hidden" name="access_key" value="2d3fd067-2c34-466f-8ad3-4e3886f065c4">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
+                                <i class="fas fa-user form-icon"></i>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email address" required>
+                                <i class="fas fa-envelope form-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your 10-digit mobile number" required>
+                                <i class="fas fa-phone form-icon"></i>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" name="city" class="form-control" placeholder="Enter your city" required>
+                                <i class="fas fa-city form-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Service Interested In *</label>
+                            <select id="service" name="service" class="form-control" required>
+                                <option value="">Select a service you're interested in</option>
+                                <option value="nursing">Nursing Services</option>
+                                <option value="caregiver">Caregiver Services</option>
+                                <option value="Physiotherapist">Physiotherapist</option>
+                                <option value="jobs">Job Opportunities</option>
+                            
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message *</label>
+                            <textarea id="message" name="message" class="form-control" placeholder="Please provide details about your requirement or inquiry..." rows="6" required></textarea>
+                            <i class="fas fa-edit form-icon"></i>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">Yes, I'd like to receive healthcare tips and updates from NeoExample</label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Find Our Work Office</h2>
+                <p>Visit us at our conveniently located office in Bengaluru</p>
+            </div>
+
+            <div class="map-container">
+                <div class="map-wrapper">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d497698.660077003!2d77.35073652481518!3d12.95451700766961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1688134567890!5m2!1sen!2sin" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Connect With Us on Social Media</h2>
+                <p>Stay updated with our latest healthcare services, job opportunities, and health tips</p>
+            </div>
+            
+            <div class="social-icons-large">
+                <a href="#" class="social-icon-large facebook" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon-large twitter" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon-large linkedin" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-icon-large instagram" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon-large youtube" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            
+            <p class="social-handle">
+                Follow <strong>@NeoExampleMHC</strong> on all platforms
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NeoExample Medical & Healthcare</h3>
+                    <p>Providing quality healthcare services at home and staffing solutions for healthcare industry.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="global.html"><i class="fas fa-chevron-right"></i> Global Services</a></li>
+                        <li><a href="team.html"><i class="fas fa-chevron-right"></i> Our Team</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Reg Office: 230, 17 B Main, Bengaluru 560102</p>
+                    <p><i class="fas fa-envelope"></i> info@neoexample.in</p>
+                    <p><i class="fas fa-globe"></i> www.NeoExample.in</p>
+                    <p><i class="fas fa-phone"></i> +91 80 1234 5678</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> NeoExample Medical & Healthcare. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-menu li a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Phone number formatting
+            const phoneInput = document.getElementById('phone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    let value = this.value.replace(/\D/g, '');
+                    if (value.length > 10) value = value.substring(0, 10);
+                    
+                    if (value.length > 6) {
+                        value = value.substring(0, 5) + ' ' + value.substring(5, 10);
+                    } else if (value.length > 5) {
+                        value = value.substring(0, 5) + ' ' + value.substring(5);
+                    }
+                    
+                    this.value = value;
+                });
+            }
+
+            // Form submission
+            const contactForm = document.querySelector('form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    // Form will submit to web3forms
+                });
+            }
+
+            // Add real-time validation
+            const formInputs = document.querySelectorAll('form .form-control');
+            formInputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.hasAttribute('required') && !this.value.trim()) {
+                        this.style.borderColor = '#ff4444';
+                    } else if (this.value.trim()) {
+                        this.style.borderColor = '#4CAF50';
+                    }
+                });
+
+                input.addEventListener('input', function() {
+                    if (this.value.trim()) {
+                        this.style.borderColor = '#4CAF50';
+                    } else {
+                        this.style.borderColor = '#e3f2fd';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

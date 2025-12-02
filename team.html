@@ -1,0 +1,1591 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - NeoExample Medical & Healthcare</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Common Background for all pages */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Professional Navigation - MATCHING global.html */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a6dbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+            color: #1a6dbb;
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu li a {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu li a:hover {
+            color: #1a6dbb;
+            background: rgba(26, 109, 187, 0.1);
+        }
+
+        .nav-menu li a.active {
+            color: #1a6dbb;
+            background: rgba(26, 109, 187, 0.15);
+        }
+
+        .nav-menu li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+            border-radius: 2px;
+        }
+
+        /* Hamburger Menu - MATCHING global.html */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: #1a6dbb;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* UPDATED: Hero Section with Rounded Bottom - EXACTLY LIKE TRAINING PAGE */
+        .team-hero {
+           background: linear-gradient(rgba(30, 136, 229, 0.92), rgba(25, 118, 210, 0.92)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&h=700&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 120px 0 80px;
+            margin-top: 70px; /* Match training page margin */
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 40px 40px;
+        }
+
+        .team-hero::before {
+          content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.05"/></svg>');
+            background-size: cover;
+            border-radius: inherit;
+        }
+
+        .team-hero h1 {
+             font-size: 4rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .team-hero p {
+             font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            position: relative;
+        }
+
+        /* Enhanced Team Philosophy Section - NO negative margin */
+        .team-philosophy {
+            background: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-philosophy::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+            z-index: 0;
+        }
+
+        .philosophy-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .philosophy-title {
+            color: #0d4d8a;
+            font-size: 3rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .philosophy-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+            border-radius: 2px;
+        }
+
+        .philosophy-text {
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(26, 109, 187, 0.1);
+            margin-bottom: 60px;
+            position: relative;
+            border: 1px solid rgba(26, 109, 187, 0.1);
+        }
+
+        .philosophy-text::before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 120px;
+            color: #e3f2fd;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .philosophy-text p {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            color: #444;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .philosophy-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .philosophy-highlight {
+            color: #1a6dbb;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        .philosophy-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(26, 109, 187, 0.15);
+            z-index: -1;
+        }
+
+        /* Team Grid Section */
+        .team-grid-section {
+            background: white;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            color: #0d4d8a;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 20px auto 0;
+            line-height: 1.6;
+        }
+
+        /* Team Grid Container */
+        .team-grid-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Team Grid Layout - Side by Side */
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin: 0 auto;
+        }
+
+        /* Team Member Card - Side by Side Layout */
+        .team-member-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(26, 109, 187, 0.1);
+            display: flex;
+            align-items: center;
+            padding: 30px;
+            min-height: 250px;
+        }
+
+        .team-member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(26, 109, 187, 0.15);
+        }
+
+        /* Photo on Left Side */
+        .member-photo-container {
+            flex: 0 0 200px;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 30px;
+        }
+
+        .member-photo-frame {
+            width: 180px;
+            height: 180px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 6px solid white;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+            background: white;
+        }
+
+        .team-member-card:hover .member-photo-frame {
+            transform: scale(1.05);
+            border-color: #e3f2fd;
+            box-shadow: 0 20px 40px rgba(26, 109, 187, 0.25);
+        }
+
+        .member-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .team-member-card:hover .member-photo {
+            transform: scale(1.1);
+        }
+
+        /* Member Info on Right Side */
+        .member-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            padding-right: 20px;
+        }
+
+        .member-name {
+            color: #0d4d8a;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .member-position {
+            color: #1a6dbb;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e3f2fd;
+            position: relative;
+            display: inline-block;
+        }
+
+        .member-position::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+        }
+
+        .member-bio {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .member-expertise {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .expertise-tag {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            color: #0d4d8a;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(26, 109, 187, 0.2);
+        }
+
+        .expertise-tag:hover {
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 109, 187, 0.2);
+        }
+
+        .profile-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 5px;
+            font-size: 1rem;
+            letter-spacing: 0.3px;
+            box-shadow: 0 8px 20px rgba(26, 109, 187, 0.15);
+            width: fit-content;
+        }
+
+        .profile-link:hover {
+            background: linear-gradient(135deg, #0d4d8a, #1a6dbb);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(26, 109, 187, 0.25);
+        }
+
+        .profile-link i {
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+
+        /* Expertise Section - Updated colors */
+        .expertise-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expertise-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,50 Q50,0 100,50 Q50,100 0,50" fill="white" opacity="0.03"/></svg>');
+            background-size: 300px;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .expertise-card {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(26, 109, 187, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 35px 70px rgba(26, 109, 187, 0.15);
+        }
+
+        .expertise-card:nth-child(1):hover { border-color: #1a6dbb; }
+        .expertise-card:nth-child(2):hover { border-color: #4a9de3; }
+        .expertise-card:nth-child(3):hover { border-color: #2c8bd9; }
+        .expertise-card:nth-child(4):hover { border-color: #0d4d8a; }
+
+        .expertise-icon {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.5s ease;
+            box-shadow: 0 12px 30px rgba(26, 109, 187, 0.2);
+        }
+
+        .expertise-card:hover .expertise-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 35px rgba(26, 109, 187, 0.3);
+        }
+
+        .expertise-card h3 {
+            color: #0d4d8a;
+            font-size: 1.7rem;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .expertise-card p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* Values Section - 2x2 Grid */
+        .values-section {
+            background: white;
+            padding: 120px 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 35px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .value-card {
+            background: white;
+            padding: 45px 30px;
+            border-radius: 25px;
+            text-align: center;
+            transition: all 0.5s ease;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(26, 109, 187, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+        }
+
+        .value-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(26, 109, 187, 0.15);
+        }
+
+        .value-icon {
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 1.8rem;
+            color: white;
+            transition: all 0.5s ease;
+            box-shadow: 0 12px 30px rgba(26, 109, 187, 0.2);
+        }
+
+        .value-card:hover .value-icon {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(26, 109, 187, 0.3);
+        }
+
+        .value-card h3 {
+            color: #0d4d8a;
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .value-card p {
+            color: #555;
+            line-height: 1.7;
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        /* Team Photo Update Section - Updated colors */
+        .team-update-section {
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+            margin: 100px 0;
+            border-radius: 30px;
+        }
+
+        .team-update-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="50" r="40" fill="white" opacity="0.05"/></svg>');
+            background-size: 400px;
+        }
+
+        .team-update-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .team-update-icon {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .team-update-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .team-update-content p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            opacity: 0.95;
+            margin-bottom: 40px;
+        }
+
+        .update-photos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .update-photo {
+            width: 100%;
+            height: 250px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .update-photo.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .update-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .update-photo:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Footer - KEEP ORIGINAL STYLING */
+        .footer {
+            background: linear-gradient(rgba(26, 109, 187, 0.92), rgba(13, 77, 138, 0.92));
+            color: white;
+            padding: 50px 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .footer-section p, .footer-section li {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-section i {
+            margin-right: 10px;
+            color: #bbdefb;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: white;
+            color: #1a6dbb;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                transition: right 0.5s ease;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                padding: 100px 0;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li a {
+                font-size: 1.2rem;
+                padding: 12px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                width: 100%;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Responsive Design - KEEP ORIGINAL FOR HERO SECTION */
+        @media (max-width: 992px) {
+            .team-hero {
+                padding: 100px 0 60px;
+                border-radius: 0 0 30px 30px;
+            }
+
+            .team-hero h1 {
+                font-size: 3.2rem;
+            }
+
+            .team-hero p {
+                font-size: 1.2rem;
+            }
+
+            .philosophy-title {
+                font-size: 2.5rem;
+            }
+
+            .philosophy-text {
+                padding: 40px;
+            }
+
+            .team-member-card {
+                flex-direction: column;
+                padding: 25px;
+                text-align: center;
+            }
+            
+            .member-photo-container {
+                flex: 0 0 auto;
+                margin-right: 0;
+                margin-bottom: 25px;
+                height: 180px;
+            }
+            
+            .member-photo-frame {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .member-info {
+                text-align: center;
+                padding-right: 0;
+            }
+            
+            .member-position::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .profile-link {
+                align-self: center;
+            }
+            
+            .expertise-grid,
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 900px;
+                margin: 60px auto 0;
+            }
+            
+            .update-photos-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 700px;
+                margin: 40px auto 0;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .team-hero {
+                border-radius: 0 0 25px 25px;
+            }
+
+            .team-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .team-hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+
+            .team-member-card {
+                padding: 20px;
+            }
+            
+            .member-photo-container {
+                height: 160px;
+            }
+            
+            .member-photo-frame {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .member-name {
+                font-size: 1.6rem;
+            }
+            
+            .member-position {
+                font-size: 1.1rem;
+            }
+            
+            .expertise-grid,
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+                max-width: 700px;
+                margin: 50px auto 0;
+            }
+            
+            .expertise-card,
+            .value-card {
+                padding: 35px 25px;
+            }
+            
+            .expertise-icon,
+            .value-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            
+            .expertise-card h3,
+            .value-card h3 {
+                font-size: 1.4rem;
+            }
+            
+            .expertise-card p,
+            .value-card p {
+                font-size: 1rem;
+            }
+            
+            .update-photos-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 500px;
+                margin: 40px auto 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .team-hero {
+                padding: 80px 0 40px;
+                border-radius: 0 0 20px 20px;
+            }
+
+            .team-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .team-hero p {
+                font-size: 1.1rem;
+            }
+
+            .philosophy-title {
+                font-size: 2rem;
+            }
+
+            .philosophy-text {
+                padding: 30px 20px;
+            }
+
+            .philosophy-text p {
+                font-size: 1.1rem;
+            }
+
+            .team-member-card {
+                padding: 20px 15px;
+            }
+            
+            .member-photo-container {
+                height: 150px;
+                margin-bottom: 20px;
+            }
+            
+            .member-photo-frame {
+                width: 130px;
+                height: 130px;
+                border-width: 4px;
+            }
+            
+            .member-name {
+                font-size: 1.4rem;
+            }
+            
+            .member-position {
+                font-size: 1rem;
+            }
+            
+            .member-bio {
+                font-size: 0.95rem;
+            }
+            
+            .expertise-grid,
+            .values-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 40px auto 0;
+            }
+            
+            .team-update-content h3 {
+                font-size: 2rem;
+            }
+            
+            .team-update-content p {
+                font-size: 1.1rem;
+            }
+            
+            .update-photos-grid {
+                grid-template-columns: 1fr;
+                max-width: 350px;
+                margin: 30px auto 0;
+            }
+            
+            .update-photo {
+                height: 200px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .team-member-card {
+                padding: 15px 10px;
+            }
+            
+            .member-photo-container {
+                height: 140px;
+            }
+            
+            .member-photo-frame {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .expertise-grid,
+            .values-grid {
+                max-width: 320px;
+            }
+            
+            .expertise-card,
+            .value-card {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- UPDATED Navigation - MATCHING global.html -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span class="logo-text">NeoExample</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Medical & Healthcare</a></li>
+                <li><a href="global.html">Global Services</a></li>
+                <li><a href="training.html">Training & Jobs</a></li>
+                <li><a href="team.html" class="active">Our Team</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- KEEP ORIGINAL: Team Hero Section - Like Training Page -->
+    <section class="team-hero">
+        <div class="container">
+            <h1>Meet Our Visionary Team</h1>
+            <p>A collective of healthcare innovators, business strategists, and compassionate leaders dedicated to transforming healthcare delivery through expertise, experience, and excellence.</p>
+        </div>
+    </section>
+
+    <!-- REST OF THE PAGE REMAINS EXACTLY THE SAME -->
+    <!-- Team Philosophy Section -->
+    <section class="team-philosophy">
+        <div class="container">
+            <div class="philosophy-content">
+                <h2 class="philosophy-title">Our Guiding Philosophy</h2>
+                
+                <div class="philosophy-text">
+                    <p>At <span class="philosophy-highlight">NeoExample Medical & Healthcare</span>, we believe that exceptional healthcare begins with an exceptional team. Our philosophy is built on three foundational pillars that guide every decision we make and every service we provide.</p>
+                    
+                    <p><span class="philosophy-highlight">Collaborative Excellence:</span> We bring together seasoned professionals from diverse sectors—healthcare, HR, training, and entrepreneurship—creating a synergy where collective expertise exceeds the sum of individual capabilities. Our interdisciplinary approach ensures comprehensive solutions that address every aspect of healthcare delivery.</p>
+                    
+                    <p><span class="philosophy-highlight">Patient-Centered Innovation:</span> Every technological advancement and process improvement we implement is measured by one simple metric: how it enhances patient care. We combine decades of clinical experience with cutting-edge technology to create solutions that are both innovative and deeply human.</p>
+                    
+                    <p><span class="philosophy-highlight">Sustainable Impact:</span> We're building more than a healthcare service; we're creating an ecosystem that nurtures talent, fosters innovation, and delivers measurable, lasting improvements in health outcomes. Our commitment extends beyond immediate care to creating sustainable healthcare infrastructure for future generations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Grid Section (Photo on Left, Info on Right) -->
+    <section class="team-grid-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Leadership Team</h2>
+                <p>Meet the dedicated professionals who drive our vision forward</p>
+            </div>
+
+            <div class="team-grid-container">
+                <div class="team-grid">
+                    <!-- Partner 1 -->
+                    <div class="team-member-card">
+                        <div class="member-photo-container">
+                            <div class="member-photo-frame">
+                                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80" 
+                                     alt="Jigna Modh" 
+                                     class="member-photo"
+                                     loading="lazy">
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Jigna Modh</h3>
+                            <p class="member-position">Partner & Healthcare Strategist</p>
+                            <p class="member-bio">With 15+ years in healthcare management, Jigna specializes in optimizing service delivery systems and implementing patient-centric care protocols that enhance both quality and efficiency across healthcare operations.</p>
+                            <div class="member-expertise">
+                                <span class="expertise-tag">Healthcare Management</span>
+                                <span class="expertise-tag">Operations</span>
+                                <span class="expertise-tag">Service Delivery</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Partner 2 -->
+                    <div class="team-member-card">
+                        <div class="member-photo-container">
+                            <div class="member-photo-frame">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80" 
+                                     alt="Skaria John" 
+                                     class="member-photo"
+                                     loading="lazy">
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Skaria John</h3>
+                            <p class="member-position">Partner & Business Development</p>
+                            <p class="member-bio">Serial entrepreneur with 12+ years building successful healthcare ventures. Skaria combines business acumen with healthcare innovation to create sustainable growth models and strategic partnerships.</p>
+                            <div class="member-expertise">
+                                <span class="expertise-tag">Entrepreneurship</span>
+                                <span class="expertise-tag">Business Development</span>
+                                <span class="expertise-tag">Strategic Planning</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mentor 1 -->
+                    <div class="team-member-card">
+                        <div class="member-photo-container">
+                            <div class="member-photo-frame">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80" 
+                                     alt="Kavitha Reddy" 
+                                     class="member-photo"
+                                     loading="lazy">
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Kavitha Reddy</h3>
+                            <p class="member-position">Start-up Mentor & Advisor</p>
+                            <p class="member-bio">With 20+ years of mentoring experience, Kavitha specializes in scaling healthcare startups, securing strategic funding, and developing sustainable business models for innovation in the healthcare sector.</p>
+                            <div class="member-expertise">
+                                <span class="expertise-tag">Mentoring</span>
+                                <span class="expertise-tag">Startup Advisory</span>
+                                <span class="expertise-tag">Business Strategy</span>
+                            </div>
+                            <a href="http://www.KavithaReddy.in" target="_blank" class="profile-link">
+                                <i class="fas fa-external-link-alt"></i> Visit Profile
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mentor 2 -->
+                    <div class="team-member-card">
+                        <div class="member-photo-container">
+                            <div class="member-photo-frame">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80" 
+                                     alt="Santosh Lad" 
+                                     class="member-photo"
+                                     loading="lazy">
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Santosh Lad</h3>
+                            <p class="member-position">Mentor & Public Policy Expert</p>
+                            <p class="member-bio">As an entrepreneur and Labour Minister, Santosh brings invaluable policy expertise and government relations experience to bridge healthcare innovation with regulatory frameworks and public health initiatives.</p>
+                            <div class="member-expertise">
+                                <span class="expertise-tag">Policy Making</span>
+                                <span class="expertise-tag">Public Service</span>
+                                <span class="expertise-tag">Government Relations</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mentor 3 -->
+                    <div class="team-member-card">
+                        <div class="member-photo-container">
+                            <div class="member-photo-frame">
+                                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80" 
+                                     alt="Dr. Mahesh Kappanayil" 
+                                     class="member-photo"
+                                     loading="lazy">
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Dr. Mahesh Kappanayil</h3>
+                            <p class="member-position">Medical Director & Innovation Lead</p>
+                            <p class="member-bio">25+ years clinical experience combined with healthcare technology expertise. Dr. Kappanayil leads our medical innovation initiatives, quality assurance protocols, and clinical excellence programs.</p>
+                            <div class="member-expertise">
+                                <span class="expertise-tag">Medical Expertise</span>
+                                <span class="expertise-tag">Clinical Innovation</span>
+                                <span class="expertise-tag">Healthcare Technology</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mentor 4 -->
+                    <div class="team-member-card">
+                        <div class="member-photo-container">
+                            <div class="member-photo-frame">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80" 
+                                     alt="Dharma Teja" 
+                                     class="member-photo"
+                                     loading="lazy">
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Dharma Teja</h3>
+                            <p class="member-position">Mentor & Industry Connector</p>
+                            <p class="member-bio">President of Automobile Association with extensive industry networks. Dharma connects healthcare innovation with business opportunities, strategic partnerships, and cross-sector collaboration.</p>
+                            <div class="member-expertise">
+                                <span class="expertise-tag">Business Leadership</span>
+                                <span class="expertise-tag">Industry Networking</span>
+                                <span class="expertise-tag">Corporate Strategy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- KEEP ORIGINAL FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NeoExample Medical & Healthcare</h3>
+                    <p>Providing quality healthcare services at home and staffing solutions for healthcare industry.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="global.html">Global Services</a></li>
+                        <li><a href="training.html">Training & Jobs</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Reg Office: 230, 17 B Main, Bengaluru 560102</p>
+                    <p><i class="fas fa-envelope"></i> info@neoexample.in</p>
+                    <p><i class="fas fa-globe"></i> www.NeoExample.in</p>
+                    <p><i class="fas fa-phone"></i> +91 80 1234 5678</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> NeoExample Medical & Healthcare. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Navbar scroll effect - MATCHING global.html
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile Menu Toggle - MATCHING global.html
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-menu li a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Animate photo drop effect
+            function animatePhotoDrop() {
+                const photos = document.querySelectorAll('.update-photo');
+                const section = document.querySelector('.team-update-section');
+                
+                if (!section) return;
+                
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight - 100) {
+                    photos.forEach((photo, index) => {
+                        setTimeout(() => {
+                            photo.classList.add('visible');
+                        }, index * 200);
+                    });
+                }
+            }
+
+            // Initial check
+            animatePhotoDrop();
+            
+            // Check on scroll
+            window.addEventListener('scroll', animatePhotoDrop);
+
+            // Animate cards on scroll
+            function animateCardsOnScroll() {
+                const sections = ['.expertise-section', '.values-section'];
+                
+                sections.forEach(sectionSelector => {
+                    const section = document.querySelector(sectionSelector);
+                    if (!section) return;
+                    
+                    const cards = section.querySelectorAll('.expertise-card, .value-card');
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight - 100) {
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, index * 150);
+                        });
+                    }
+                });
+            }
+
+            // Initialize opacity for animation
+            document.querySelectorAll('.expertise-card, .value-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+
+            // Initial check and scroll listener
+            animateCardsOnScroll();
+            window.addEventListener('scroll', animateCardsOnScroll);
+
+            // Animate team cards on scroll
+            function animateTeamCards() {
+                const cards = document.querySelectorAll('.team-member-card');
+                const section = document.querySelector('.team-grid-section');
+                
+                if (!section) return;
+                
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight - 100) {
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                }
+            }
+
+            // Initialize opacity for team cards
+            document.querySelectorAll('.team-member-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+
+            // Initial check and scroll listener for team cards
+            animateTeamCards();
+            window.addEventListener('scroll', animateTeamCards);
+        });
+    </script>
+</body>
+</html>

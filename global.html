@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoExample Global Services</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Common Background for all pages */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Professional Navigation - UPDATED to match services.html */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a6dbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+            color: #1a6dbb;
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu li a {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu li a:hover {
+            color: #1a6dbb;
+            background: rgba(26, 109, 187, 0.1);
+        }
+
+        .nav-menu li a.active {
+            color: #1a6dbb;
+            background: rgba(26, 109, 187, 0.15);
+        }
+
+        .nav-menu li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+            border-radius: 2px;
+        }
+
+        /* Hamburger Menu - UPDATED to match services.html */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: #1a6dbb;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section with Rounded Bottom - EXACTLY LIKE TRAINING PAGE */
+        .global-hero {
+            background: linear-gradient(rgba(30, 136, 229, 0.92), rgba(25, 118, 210, 0.92)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&h=700&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 120px 0 80px;
+            margin-top: 70px; /* Match training page margin */
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 40px 40px;
+        }
+
+        .global-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.05"/></svg>');
+            background-size: cover;
+            border-radius: inherit;
+        }
+
+        .global-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .global-hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            position: relative;
+        }
+
+        /* Section Styling */
+        .global-section {
+            background: white;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title h2 {
+            color: #0d4d8a;
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 30px auto 0;
+            line-height: 1.6;
+        }
+
+        /* About Us - Different Style (Not Box) */
+        .about-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+            position: relative;
+            overflow: hidden;
+            border-radius: 30px;
+            margin: -40px 0 100px; /* Negative margin to pull up like training page */
+            box-shadow: 0 30px 60px rgba(26, 109, 187, 0.1);
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,50 Q50,0 100,50 Q50,100 0,50" fill="white" opacity="0.03"/></svg>');
+            background-size: 300px;
+        }
+
+        .about-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .about-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            box-shadow: 0 15px 30px rgba(26, 109, 187, 0.3);
+            transform: translateY(0);
+            transition: all 0.4s ease;
+        }
+
+        .about-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(26, 109, 187, 0.4);
+        }
+
+        .about-badge i {
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .about-description {
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(26, 109, 187, 0.1);
+        }
+
+        .about-description h2 {
+            color: #0d4d8a;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .about-description p {
+            color: #555;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* Info Cards Grid - Adjusted to 2x1 layout (2 cards in a row) */
+        .global-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(26, 109, 187, 0.1);
+            padding: 40px;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #1a6dbb, #4a9de3);
+        }
+
+        .info-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 35px 70px rgba(26, 109, 187, 0.15);
+        }
+
+        .info-card h3 {
+            color: #0d4d8a;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-card h3 i {
+            margin-right: 15px;
+            color: #1a6dbb;
+            font-size: 1.8rem;
+        }
+
+        /* Eligibility List Styling */
+        .eligibility-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .eligibility-list li {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            display: flex;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(26, 109, 187, 0.1);
+        }
+
+        .eligibility-list li:last-child {
+            border-bottom: none;
+        }
+
+        .eligibility-list li::before {
+            content: '✓';
+            color: #1a6dbb;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* NEW: Recruitment Areas - Beautiful Timeline Style */
+        .recruitment-areas-section {
+            background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+            padding: 80px 0;
+            border-radius: 30px;
+            margin: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recruitment-areas-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,50 Q50,0 100,50 Q50,100 0,50" fill="white" opacity="0.03"/></svg>');
+            background-size: 300px;
+        }
+
+        .recruitment-areas-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .recruitment-areas-title h3 {
+            color: #0d4d8a;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .recruitment-areas-title p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .recruitment-timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding: 0 20px;
+        }
+
+        .recruitment-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1a6dbb, #4a9de3);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 30px);
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 30px);
+            text-align: left;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(26, 109, 187, 0.2);
+            border: 3px solid #1a6dbb;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-marker {
+            right: calc(50% - 30px);
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            left: calc(50% - 30px);
+        }
+
+        .timeline-marker i {
+            font-size: 1.5rem;
+            color: #1a6dbb;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(26, 109, 187, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(26, 109, 187, 0.15);
+            border-color: rgba(26, 109, 187, 0.2);
+        }
+
+        .timeline-item:hover .timeline-marker {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+            border-color: transparent;
+        }
+
+        .timeline-item:hover .timeline-marker i {
+            color: white;
+        }
+
+        .timeline-content h4 {
+            color: #0d4d8a;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-content h4 i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+        }
+
+        .timeline-content p {
+            color: #555;
+            margin: 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Image with Caption */
+        .image-with-caption {
+            margin: 80px auto;
+            max-width: 1200px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .global-image {
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .global-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+
+        .global-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-style: italic;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            background: linear-gradient(135deg, #1a6dbb 0%, #0d4d8a 100%);
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 30px;
+            margin: 100px 0;
+            box-shadow: 0 30px 60px rgba(26, 109, 187, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.05"/></svg>');
+            background-size: cover;
+        }
+
+        .contact-cta h3 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-cta p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            background: white;
+            color: #1a6dbb;
+            padding: 20px 45px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-btn:hover {
+            background: #f8fbff;
+            transform: translateY(-5px);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-btn i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #0d4d8a 0%, #1a3a5f 100%);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.03"/></svg>');
+            background-size: cover;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .footer-section p, .footer-section li {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-section i {
+            margin-right: 12px;
+            color: #4a9de3;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: white;
+            color: #1a6dbb;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                transition: right 0.5s ease;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                padding: 100px 0;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li a {
+                font-size: 1.2rem;
+                padding: 12px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                width: 100%;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Responsive Design - Updated for new timeline layout */
+        @media (max-width: 1200px) {
+            .global-info {
+                max-width: 1000px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .about-section {
+                margin: -20px 20px 80px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .recruitment-timeline {
+                max-width: 700px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .global-hero {
+                padding: 100px 0 60px;
+                border-radius: 0 0 30px 30px;
+            }
+
+            .global-hero h1 {
+                font-size: 3.2rem;
+            }
+
+            .global-hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+
+            .global-info {
+                max-width: 600px;
+                grid-template-columns: 1fr;
+            }
+
+            .global-image img {
+                height: 350px;
+            }
+
+            .about-section {
+                margin: -20px 0 80px;
+            }
+
+            .about-description {
+                padding: 40px;
+            }
+
+            .about-description h2 {
+                font-size: 2.2rem;
+            }
+            
+            /* Timeline responsive */
+            .recruitment-timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 80px;
+                padding-right: 0;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-marker,
+            .timeline-item:nth-child(even) .timeline-marker {
+                left: 0;
+                right: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .global-hero {
+                border-radius: 0 0 25px 25px;
+            }
+
+            .global-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .global-hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+
+            .section-title p {
+                font-size: 1.1rem;
+            }
+
+            .info-card {
+                padding: 30px;
+            }
+
+            .contact-cta {
+                padding: 60px 20px;
+            }
+
+            .contact-cta h3 {
+                font-size: 2rem;
+            }
+
+            .about-description {
+                padding: 30px 20px;
+            }
+
+            .about-description h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-badge {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .recruitment-areas-title h3 {
+                font-size: 2rem;
+            }
+            
+            .timeline-content {
+                padding: 25px;
+            }
+            
+            .timeline-content h4 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .global-hero {
+                padding: 80px 0 40px;
+                border-radius: 0 0 20px 20px;
+            }
+
+            .global-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .info-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .global-image img {
+                height: 250px;
+            }
+
+            .image-caption {
+                padding: 20px;
+                font-size: 1.1rem;
+            }
+
+            .cta-btn {
+                padding: 18px 30px;
+                font-size: 1.1rem;
+            }
+
+            .about-badge {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .recruitment-areas-title h3 {
+                font-size: 1.8rem;
+            }
+            
+            .timeline-marker {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .timeline-marker i {
+                font-size: 1.3rem;
+            }
+            
+            .timeline-content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .global-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-card {
+                padding: 20px 15px;
+            }
+
+            .eligibility-list li {
+                font-size: 1rem;
+            }
+
+            .contact-cta h3 {
+                font-size: 1.6rem;
+            }
+
+            .about-badge {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .about-badge i {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .about-description p {
+                font-size: 1.1rem;
+            }
+            
+            .timeline-item {
+                padding-left: 60px !important;
+                padding-right: 0 !important;
+            }
+            
+            .timeline-marker {
+                width: 40px;
+                height: 40px;
+                left: 0 !important;
+            }
+            
+            .timeline-marker i {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- UPDATED Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span class="logo-text">NeoExample</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Medical & Healthcare</a></li>
+                <li><a href="global.html" class="active">Global Services</a></li>
+                <li><a href="training.html">Training & Jobs</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Global Hero Section - EXACTLY LIKE TRAINING PAGE -->
+    <section class="global-hero">
+        <div class="container">
+            <h1>NeoExample Global Services</h1>
+            <p>Connecting qualified Indian healthcare professionals with global opportunities</p>
+        </div>
+    </section>
+
+    <!-- About Us - Different Style (Not Box) -->
+    <section class="about-section">
+        <div class="about-content">
+            <div class="about-badge">
+                <i class="fas fa-globe-americas"></i>
+                <span>About NeoExample Global Services</span>
+            </div>
+            
+            <div class="about-description">
+                <h2>Building Global Healthcare Careers</h2>
+                <p>NeoExample Global Services is a premier recruitment firm based in Bengaluru, specializing in connecting qualified and talented healthcare professionals from India with Hospitals & Healthcare facilities across the globe. We provide end-to-end recruitment solutions for nurses, doctors, and paramedical staff seeking international career opportunities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Services Section -->
+    <section class="global-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Global Services</h2>
+                <p>Comprehensive support for your international healthcare career journey</p>
+            </div>
+
+            <div class="global-info">
+                <!-- Our Services Card -->
+                <div class="info-card">
+                    <h3><i class="fas fa-concierge-bell"></i> Our Services</h3>
+                    <ul class="eligibility-list">
+                        <li>Counselling & Career Guidance</li>
+                        <li>Refresher Training Programs</li>
+                        <li>Data Flow Processing</li>
+                        <li>Prometric Exam Assistance</li>
+                        <li>MOHA Attestation Services</li>
+                        <li>NHRA Processing Support</li>
+                        <li>HRD Attestation Assistance</li>
+                        <li>College Verification Services</li>
+                    </ul>
+                </div>
+                
+                <!-- Eligibility Criteria Card -->
+                <div class="info-card">
+                    <h3><i class="fas fa-clipboard-check"></i> Eligibility Criteria</h3>
+                    <ul class="eligibility-list">
+                        <li>Qualified & Certified as per industry norms</li>
+                        <li>Minimum 2 years of Experience in healthcare</li>
+                        <li>Valid Passport with minimum 2 years validity</li>
+                        <li>Good Communication Skills in English</li>
+                        <li>Clear Background Check</li>
+                        <li>Medical Fitness Certificate</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- NEW: Beautiful Recruitment Areas Timeline Section -->
+            <div class="recruitment-areas-section">
+                <div class="recruitment-areas-title">
+                    <h3>Recruitment Areas</h3>
+                    <p>We connect healthcare professionals with opportunities worldwide</p>
+                </div>
+                
+                <div class="recruitment-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">
+                            <i class="fas fa-globe-asia"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-globe-asia"></i> Domestic & International Opportunities</h4>
+                            <p>We provide recruitment services for India, Middle East, New Zealand, Australia, UK, Canada, USA and other countries across the globe.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-user-md"></i> International Requirements</h4>
+                            <p>Specializing in placement of Doctors, Nurses, Paramedical Staff, and Healthcare Administrators for international healthcare facilities.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker">
+                            <i class="fas fa-hospital"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-hospital"></i> Domestic Requirements</h4>
+                            <p>Connecting Doctors and Nurses with Hospitals, Companies, Schools, Colleges, and Institutions across India.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Image with Caption -->
+            <div class="image-with-caption">
+                <div class="global-image">
+                    <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="International Healthcare Team" 
+                         loading="lazy">
+                    <div class="image-caption">Join Our Global Healthcare Network</div>
+                </div>
+            </div>
+            
+            <!-- Contact CTA -->
+            <div class="contact-cta">
+                <h3>Start Your Global Healthcare Journey Today!</h3>
+                <p>Connect with our team to explore international opportunities and take your career to the next level.</p>
+                <a href="contact.html" class="cta-btn">
+                    <i class="fas fa-paper-plane"></i> Contact Us Now
+                </a>
+            </div>
+            
+            <!-- Second Image -->
+            <div class="image-with-caption">
+                <div class="global-image">
+                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=450&q=80" 
+                         alt="Global Healthcare Opportunities" 
+                         loading="lazy">
+                    <div class="image-caption">International Healthcare Careers</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NeoExample Medical & Healthcare</h3>
+                    <p>Providing quality healthcare services at home and staffing solutions for healthcare industry.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="global.html">Global Services</a></li>
+                        <li><a href="training.html">Training & Jobs</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Reg Office: 230, 17 B Main, Bengaluru 560102</p>
+                    <p><i class="fas fa-envelope"></i> NeoExamplemhc@gmail.com</p>
+                    <p><i class="fas fa-globe"></i> www.NeoExample.in</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> NeoExample Medical & Healthcare. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-menu li a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Timeline animation on scroll
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            function checkTimelineVisibility() {
+                const windowHeight = window.innerHeight;
+                
+                timelineItems.forEach((item, index) => {
+                    const rect = item.getBoundingClientRect();
+                    
+                    if (rect.top < windowHeight - 100) {
+                        // Stagger the animation with delay
+                        setTimeout(() => {
+                            item.classList.add('visible');
+                        }, index * 200); // 200ms delay between each item
+                    }
+                });
+            }
+
+            // Add animation to elements when they come into view
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.info-card, .global-image, .about-description');
+                
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+                
+                checkTimelineVisibility();
+            }
+
+            // Initialize opacity for animation
+            document.querySelectorAll('.info-card, .global-image, .about-description').forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+
+            // Contact button animation
+            const ctaBtn = document.querySelector('.cta-btn');
+            if (ctaBtn) {
+                ctaBtn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                ctaBtn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            }
+
+            // About badge animation
+            const aboutBadge = document.querySelector('.about-badge');
+            if (aboutBadge) {
+                aboutBadge.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                aboutBadge.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            }
+
+            // Hover effect for timeline items
+            timelineItems.forEach(item => {
+                const marker = item.querySelector('.timeline-marker');
+                const content = item.querySelector('.timeline-content');
+                
+                item.addEventListener('mouseenter', function() {
+                    if (!item.classList.contains('visible')) return;
+                    
+                    marker.style.transform = 'scale(1.1)';
+                    marker.style.background = 'linear-gradient(135deg, #1a6dbb, #4a9de3)';
+                    marker.style.borderColor = 'transparent';
+                    marker.querySelector('i').style.color = 'white';
+                    
+                    content.style.transform = 'translateY(-5px)';
+                    content.style.boxShadow = '0 20px 40px rgba(26, 109, 187, 0.15)';
+                    content.style.borderColor = 'rgba(26, 109, 187, 0.2)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    if (!item.classList.contains('visible')) return;
+                    
+                    marker.style.transform = 'scale(1)';
+                    marker.style.background = 'white';
+                    marker.style.borderColor = '#1a6dbb';
+                    marker.querySelector('i').style.color = '#1a6dbb';
+                    
+                    content.style.transform = 'translateY(0)';
+                    content.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.08)';
+                    content.style.borderColor = 'rgba(26, 109, 187, 0.1)';
+                });
+            });
+
+            // Initial check and scroll listener
+            animateOnScroll();
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Initial timeline check
+            setTimeout(checkTimelineVisibility, 500);
+        });
+    </script>
+</body>
+</html>

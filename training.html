@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training & Jobs - NeoExample</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+  /* Common Background for all pages */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Professional Navigation - UPDATED to match services.html */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    padding: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1a6dbb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1001;
+}
+
+.logo i {
+    font-size: 1.5rem;
+    color: #1a6dbb;
+}
+
+.logo-text {
+    background: linear-gradient(135deg, #1a6dbb, #4a9de3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-menu li a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-menu li a:hover {
+    color: #1a6dbb;
+    background: rgba(26, 109, 187, 0.1);
+}
+
+.nav-menu li a.active {
+    color: #1a6dbb;
+    background: rgba(26, 109, 187, 0.15);
+}
+
+.nav-menu li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 3px;
+    background: linear-gradient(to right, #1a6dbb, #4a9de3);
+    border-radius: 2px;
+}
+
+/* Hamburger Menu - UPDATED to match services.html */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+    width: 30px;
+    height: 25px;
+    justify-content: space-between;
+}
+
+.hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #1a6dbb;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Menu Styles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        transition: right 0.5s ease;
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        padding: 100px 0;
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-menu li a {
+        font-size: 1.2rem;
+        padding: 12px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu {
+        width: 100%;
+    }
+    
+    .logo {
+        font-size: 1.4rem;
+    }
+}
+
+/* Hero Section with Rounded Bottom */
+.training-hero {
+    background: linear-gradient(rgba(30, 136, 229, 0.92), rgba(25, 118, 210, 0.92)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&h=700&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    text-align: center;
+    padding: 120px 0 80px;
+    margin-top: 70px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 40px 40px;
+}
+
+.training-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.05"/></svg>');
+    background-size: cover;
+    border-radius: inherit;
+}
+
+.training-hero h1 {
+    font-size: 4rem;
+    margin-bottom: 25px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: fadeInDown 1s ease-out;
+}
+
+.training-hero p {
+    font-size: 1.4rem;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.95;
+    line-height: 1.6;
+    font-weight: 300;
+    animation: fadeInUp 1s ease-out 0.3s both;
+    position: relative;
+}
+
+/* Section Styling */
+.training-section {
+    background: white;
+    padding: 100px 0;
+    position: relative;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.section-title h2 {
+    color: #1565c0;
+    font-size: 3.2rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(to right, #1e88e5, #64b5f6);
+    border-radius: 2px;
+}
+
+.section-title p {
+    color: #666;
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 30px auto 0;
+    line-height: 1.6;
+}
+
+/* EYE-CATCHING Association Section */
+.association-section {
+    background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+    margin: -40px 0 100px;
+    border-radius: 30px;
+    box-shadow: 0 30px 60px rgba(30, 136, 229, 0.1);
+}
+
+.association-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,50 Q50,0 100,50 Q50,100 0,50" fill="white" opacity="0.03"/></svg>');
+    background-size: 300px;
+}
+
+.association-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.association-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, #1e88e5, #64b5f6);
+    color: white;
+    padding: 15px 40px;
+    border-radius: 50px;
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    box-shadow: 0 15px 30px rgba(30, 136, 229, 0.3);
+    transform: translateY(0);
+    transition: all 0.4s ease;
+}
+
+.association-badge:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(30, 136, 229, 0.4);
+}
+
+.association-badge i {
+    margin-right: 15px;
+    font-size: 1.5rem;
+}
+
+.association-description {
+    background: white;
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(30, 136, 229, 0.1);
+}
+
+.association-description h2 {
+    color: #1565c0;
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.association-description p {
+    color: #555;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* Training Courses Grid - 2x2 - IMPROVED FOR MOBILE */
+.training-courses {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.course-card {
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(30, 136, 229, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.course-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 35px 70px rgba(30, 136, 229, 0.15);
+}
+
+.course-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.course-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.course-card:hover .course-image img {
+    transform: scale(1.1);
+}
+
+.course-card h3 {
+    color: #1565c0;
+    font-size: 1.6rem;
+    margin: 30px 30px 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* Eligibility Box - IMPROVED */
+.eligibility-box {
+    background: #f8fbff;
+    margin: 0 30px 25px;
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(30, 136, 229, 0.1);
+}
+
+.eligibility-box h4 {
+    color: #1e88e5;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.eligibility-box h4 i {
+    margin-right: 10px;
+    font-size: 1.3rem;
+}
+
+.eligibility-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.eligibility-box li {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    width: 100%;
+}
+
+.eligibility-box li i {
+    color: #1e88e5;
+    margin-right: 12px;
+    margin-top: 3px;
+    font-size: 1rem;
+    flex-shrink: 0;
+    width: 20px;
+}
+
+.eligibility-box li span {
+    flex: 1;
+}
+
+/* Course Details - IMPROVED LAYOUT */
+.course-details {
+    margin: 0 30px 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    background: #f8fbff;
+    border-radius: 10px;
+    border: 1px solid rgba(30, 136, 229, 0.1);
+    transition: all 0.3s ease;
+    min-height: 90px;
+    justify-content: center;
+}
+
+.detail-item:hover {
+    background: #e3f2fd;
+    transform: translateY(-2px);
+}
+
+.detail-item i {
+    color: #1e88e5;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.detail-item span {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    width: 100%;
+}
+
+.detail-item strong {
+    color: #1565c0;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Enroll Button - IMPROVED */
+.enroll-btn-container {
+    margin-top: auto;
+    padding: 30px;
+    background: #f8fbff;
+    border-top: 1px solid rgba(30, 136, 229, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.enroll-btn {
+    background: linear-gradient(135deg, #1e88e5, #64b5f6);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 12px 25px rgba(30, 136, 229, 0.2);
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.enroll-btn:hover {
+    background: linear-gradient(135deg, #1565c0, #1e88e5);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 35px rgba(30, 136, 229, 0.3);
+}
+
+.enroll-btn i {
+    margin-right: 12px;
+    font-size: 1.2rem;
+}
+
+/* Jobs Section */
+.jobs-section {
+    background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.jobs-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="50" r="40" fill="white" opacity="0.03"/></svg>');
+    background-size: 400px;
+}
+
+.jobs-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.job-card {
+    background: white;
+    padding: 60px;
+    border-radius: 25px;
+    box-shadow: 0 30px 60px rgba(30, 136, 229, 0.15);
+    border: 1px solid rgba(30, 136, 229, 0.1);
+}
+
+.job-card > p {
+    color: #555;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.job-opportunities {
+    background: #f8fbff;
+    padding: 35px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(30, 136, 229, 0.1);
+}
+
+.job-opportunities h4 {
+    color: #1565c0;
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.job-opportunities h4 i {
+    margin-right: 15px;
+    color: #1e88e5;
+    font-size: 1.5rem;
+}
+
+.job-opportunities ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.job-opportunities li {
+    color: #555;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid rgba(30, 136, 229, 0.1);
+    transition: all 0.3s ease;
+}
+
+.job-opportunities li:hover {
+    background: #e3f2fd;
+    transform: translateY(-2px);
+}
+
+.job-opportunities strong {
+    color: #1565c0;
+    font-weight: 600;
+}
+
+.apply-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+    padding: 20px 45px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: all 0.4s ease;
+    margin: 0 auto 20px;
+    display: block;
+    text-align: center;
+    box-shadow: 0 12px 25px rgba(76, 175, 80, 0.2);
+}
+
+.apply-btn:hover {
+    background: linear-gradient(135deg, #388E3C, #1B5E20);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 35px rgba(76, 175, 80, 0.3);
+}
+
+.apply-btn i {
+    margin-right: 12px;
+    font-size: 1.3rem;
+}
+
+.form-note {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 40px;
+}
+
+.job-benefits {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    padding: 35px;
+    border-radius: 20px;
+    border: 1px solid rgba(30, 136, 229, 0.2);
+}
+
+.job-benefits h4 {
+    color: #1565c0;
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.job-benefits h4 i {
+    margin-right: 15px;
+    color: #1e88e5;
+    font-size: 1.5rem;
+}
+
+.job-benefits ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.job-benefits li {
+    color: #555;
+    padding: 15px 20px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid rgba(30, 136, 229, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.job-benefits li::before {
+    content: '✓';
+    color: #4CAF50;
+    font-weight: bold;
+    margin-right: 12px;
+    font-size: 1.1rem;
+}
+
+.job-benefits li:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(30, 136, 229, 0.1);
+}
+
+/* Benefits Section - 2x3 Grid */
+.benefits-section {
+    background: white;
+    padding: 100px 0;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.benefit-item {
+    background: white;
+    padding: 50px 40px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.5s ease;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(30, 136, 229, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, #1e88e5, #64b5f6);
+}
+
+.benefit-item:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 60px rgba(30, 136, 229, 0.15);
+}
+
+.benefit-item i {
+    font-size: 3.5rem;
+    color: #1e88e5;
+    margin-bottom: 25px;
+    display: block;
+    transition: all 0.5s ease;
+}
+
+.benefit-item:hover i {
+    transform: scale(1.2);
+    color: #1565c0;
+}
+
+.benefit-item h4 {
+    color: #1565c0;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.benefit-item p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, #0d4d8a 0%, #1a3a5f 100%);
+    color: white;
+    padding: 80px 0 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.03"/></svg>');
+    background-size: cover;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-section h3 {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    color: white;
+    font-weight: 600;
+}
+
+.footer-section p, .footer-section li {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.8;
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 12px;
+}
+
+.footer-section ul li a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: white;
+    padding-left: 5px;
+}
+
+.footer-section i {
+    margin-right: 12px;
+    color: #4a9de3;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons a {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: white;
+    color: #1a6dbb;
+    transform: translateY(-3px);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .training-courses,
+    .benefits-grid {
+        max-width: 1000px;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .training-hero {
+        padding: 100px 0 60px;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .training-hero h1 {
+        font-size: 3.2rem;
+    }
+
+    .training-hero p {
+        font-size: 1.2rem;
+    }
+
+    .section-title h2 {
+        font-size: 2.5rem;
+    }
+
+    .association-section {
+        margin: -20px 0 80px;
+    }
+
+    .training-courses {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        gap: 30px;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+    }
+
+    .job-opportunities ul {
+        grid-template-columns: 1fr;
+    }
+
+    .job-card {
+        padding: 40px;
+    }
+    
+    .course-details {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .training-hero {
+        border-radius: 0 0 25px 25px;
+    }
+
+    .training-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .training-hero p {
+        font-size: 1.1rem;
+    }
+
+    .section-title h2 {
+        font-size: 2.2rem;
+    }
+
+    .section-title p {
+        font-size: 1.1rem;
+    }
+
+    .association-description {
+        padding: 30px 20px;
+    }
+
+    .association-description h2 {
+        font-size: 2rem;
+    }
+
+    .course-card {
+        padding: 0;
+        border-radius: 20px;
+    }
+
+    .course-card h3 {
+        font-size: 1.5rem;
+        margin: 25px 20px 15px;
+        text-align: center;
+        line-height: 1.3;
+    }
+
+    .eligibility-box {
+        margin: 0 20px 20px;
+        padding: 20px;
+    }
+
+    .eligibility-box h4 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .eligibility-box li {
+        font-size: 0.95rem;
+    }
+
+    .course-details {
+        margin: 0 20px 25px;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .detail-item {
+        padding: 12px;
+        min-height: 80px;
+        flex-direction: row;
+        text-align: left;
+        justify-content: flex-start;
+    }
+
+    .detail-item i {
+        margin-bottom: 0;
+        margin-right: 15px;
+        font-size: 1.3rem;
+        width: 30px;
+        text-align: center;
+    }
+
+    .detail-item span {
+        font-size: 0.95rem;
+        flex: 1;
+    }
+
+    .enroll-btn-container {
+        padding: 25px 20px;
+    }
+
+    .enroll-btn {
+        padding: 16px 30px;
+        font-size: 1rem;
+    }
+
+    .job-card {
+        padding: 30px 20px;
+    }
+
+    .apply-btn {
+        padding: 18px 30px;
+        font-size: 1.1rem;
+    }
+
+    .association-badge {
+        padding: 12px 25px;
+        font-size: 1rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .association-badge i {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .course-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 576px) {
+    .training-hero {
+        padding: 80px 0 40px;
+        border-radius: 0 0 20px 20px;
+    }
+
+    .training-hero h1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
+
+    .association-badge {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+    }
+
+    .course-card h3 {
+        font-size: 1.4rem;
+        margin: 20px 15px 15px;
+        line-height: 1.3;
+    }
+
+    .eligibility-box {
+        margin: 0 15px 15px;
+        padding: 18px;
+    }
+
+    .eligibility-box h4 {
+        font-size: 1rem;
+    }
+
+    .eligibility-box li {
+        font-size: 0.9rem;
+        align-items: flex-start;
+    }
+
+    .eligibility-box li i {
+        font-size: 0.9rem;
+        margin-right: 10px;
+        margin-top: 2px;
+    }
+
+    .course-details {
+        margin: 0 15px 20px;
+        gap: 8px;
+    }
+
+    .detail-item {
+        padding: 10px 12px;
+        min-height: 70px;
+    }
+
+    .detail-item i {
+        font-size: 1.2rem;
+        margin-right: 12px;
+        width: 25px;
+    }
+
+    .detail-item span {
+        font-size: 0.9rem;
+    }
+
+    .detail-item strong {
+        font-size: 0.9rem;
+    }
+
+    .enroll-btn-container {
+        padding: 20px 15px;
+    }
+
+    .enroll-btn {
+        padding: 15px 25px;
+        font-size: 0.95rem;
+    }
+
+    .benefit-item {
+        padding: 25px 20px;
+    }
+
+    .benefit-item h4 {
+        font-size: 1.3rem;
+    }
+
+    .benefit-item i {
+        font-size: 2.8rem;
+    }
+
+    .benefit-item p {
+        font-size: 1rem;
+    }
+    
+    .course-image {
+        height: 160px;
+    }
+    
+    .training-courses {
+        gap: 25px;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .association-badge {
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+
+    .association-badge i {
+        margin-right: 0;
+        margin-bottom: 8px;
+        font-size: 1.3rem;
+    }
+
+    .course-card {
+        border-radius: 15px;
+    }
+
+    .course-card h3 {
+        font-size: 1.3rem;
+        margin: 15px 12px 12px;
+    }
+
+    .eligibility-box {
+        margin: 0 12px 12px;
+        padding: 15px;
+    }
+
+    .eligibility-box li {
+        font-size: 0.85rem;
+    }
+
+    .course-details {
+        margin: 0 12px 15px;
+    }
+
+    .detail-item {
+        padding: 8px 10px;
+        min-height: 65px;
+    }
+
+    .detail-item i {
+        font-size: 1.1rem;
+        margin-right: 10px;
+        width: 22px;
+    }
+
+    .detail-item span {
+        font-size: 0.85rem;
+    }
+
+    .enroll-btn-container {
+        padding: 15px 12px;
+    }
+
+    .enroll-btn {
+        padding: 14px 20px;
+        font-size: 0.9rem;
+    }
+
+    .benefit-item {
+        padding: 20px 15px;
+    }
+
+    .benefit-item h4 {
+        font-size: 1.2rem;
+    }
+
+    .benefit-item i {
+        font-size: 2.5rem;
+    }
+    
+    .course-image {
+        height: 150px;
+    }
+    
+    .training-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .training-hero p {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+}
+
+/* Fix for very small screens */
+@media (max-width: 350px) {
+    .course-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .detail-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .detail-item i {
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+    
+    .detail-item span {
+        font-size: 0.8rem;
+    }
+    
+    .enroll-btn {
+        padding: 12px 15px;
+        font-size: 0.85rem;
+    }
+}
+</style>
+</head>
+<body>
+    <!-- UPDATED Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span class="logo-text">NeoExample</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Medical & Healthcare</a></li>
+                <li><a href="global.html">Global Services</a></li>
+                <li><a href="training.html" class="active">Training & Jobs</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Training Hero Section -->
+    <section class="training-hero">
+        <div class="container">
+            <h1>Training & Jobs</h1>
+            <p>Professional training programs and career opportunities in healthcare</p>
+        </div>
+    </section>
+
+    <!-- Eye-Catching Association Section -->
+    <section class="association-section">
+        <div class="association-content">
+            <div class="association-badge">
+                <i class="fas fa-handshake"></i>
+                <span>Training in association with Talent Tree HR Services</span>
+            </div>
+            
+            <div class="association-description">
+                <h2>Professional Healthcare Training</h2>
+                <p>We offer comprehensive training programs in association with Talent Tree HR Services to enhance skills and employability in the healthcare sector. Our courses are designed by industry experts and provide hands-on experience with modern medical equipment and real-world scenarios.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Courses Grid -->
+    <section class="training-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Training Programs</h2>
+                <p>Choose from our industry-leading healthcare training courses</p>
+            </div>
+
+            <div class="training-courses">
+                <!-- Course 1 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300&q=80" 
+                             alt="Nursing Training Program" 
+                             loading="lazy">
+                    </div>
+                    <h3>10 hours Refresher Program for ANM & GNM</h3>
+                    
+                    <div class="eligibility-box">
+                        <h4><i class="fas fa-user-check"></i> Eligibility:</h4>
+                        <ul>
+                            <li><i class="fas fa-graduation-cap"></i> ANM or GNM Qualified</li>
+                            <li><i class="fas fa-comments"></i> Good Communication Skills</li>
+                            <li><i class="fas fa-certificate"></i> Valid Nursing Registration</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="course-details">
+                        <div class="detail-item">
+                            <i class="fas fa-rupee-sign"></i>
+                            <span><strong>Test & Certification Fee:</strong> Rs 1000</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span><strong>Batch:</strong> Weekly (Monday Start)</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span><strong>Duration:</strong> 10 Hours (2 Days)</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span><strong>Mode:</strong> Classroom & Practical</span>
+                        </div>
+                    </div>
+                    
+                    <div class="enroll-btn-container">
+                        <button class="enroll-btn">
+                            <i class="fas fa-user-plus"></i> Enroll Now
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Course 2 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300&q=80" 
+                             alt="GDA & HHA Course" 
+                             loading="lazy">
+                    </div>
+                    <h3>60-90 hours GDA & HHA Course</h3>
+                    
+                    <div class="eligibility-box">
+                        <h4><i class="fas fa-user-check"></i> Eligibility:</h4>
+                        <ul>
+                            <li><i class="fas fa-graduation-cap"></i> Minimum 10<sup>th</sup> Standard Pass</li>
+                            <li><i class="fas fa-comments"></i> Good Communication Skills</li>
+                            <li><i class="fas fa-language"></i> Languages: English, Kannada, and Regional Languages</li>
+                            <li><i class="fas fa-hands-helping"></i> Service Oriented Nature</li>
+                            <li><i class="fas fa-brain"></i> Quick Learner</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="course-details">
+                        <div class="detail-item">
+                            <i class="fas fa-rupee-sign"></i>
+                            <span><strong>Course Cost:</strong> Rs 5000</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-rupee-sign"></i>
+                            <span><strong>Test & Certification Fee:</strong> Rs 1000</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span><strong>Batch:</strong> Monthly (1st of every month)</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span><strong>Duration:</strong> 60-90 Hours (3-4 Weeks)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="enroll-btn-container">
+                        <button class="enroll-btn">
+                            <i class="fas fa-user-plus"></i> Enroll Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <section class="jobs-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Career Opportunities</h2>
+                <p>Join our team of healthcare professionals and build a rewarding career</p>
+            </div>
+
+            <div class="jobs-content">
+                    
+                    <a href="https://forms.example.com/neocare-jobs" target="_blank" class="apply-btn">
+                        <i class="fas fa-external-link-alt"></i> Apply for Jobs
+                    </a>
+                   
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NeoExample Medical & Healthcare</h3>
+                    <p>Providing quality healthcare services at home and staffing solutions for healthcare industry.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="global.html">Global Services</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Reg Office: 230, 17 B Main, Bengaluru 560102</p>
+                    <p><i class="fas fa-envelope"></i> NeoExamplemhc@gmail.com</p>
+                    <p><i class="fas fa-globe"></i> www.NeoExample.in</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> NeoExample Medical & Healthcare. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-menu li a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Enroll button functionality
+            const enrollButtons = document.querySelectorAll('.enroll-btn');
+            enrollButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Create enrollment modal or redirect
+                    alert('Thank you for your interest! Our enrollment team will contact you shortly with more details.');
+                    
+                    // Simulate loading state
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                    this.disabled = true;
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                    }, 2000);
+                });
+            });
+
+            // Apply button functionality
+            const applyBtn = document.querySelector('.apply-btn');
+            if (applyBtn) {
+                applyBtn.addEventListener('click', function(e) {
+                    // Optional: Track job application clicks
+                    console.log('Job application clicked');
+                    // The link will naturally redirect to the form
+                });
+            }
+
+            // Association badge animation
+            const associationBadge = document.querySelector('.association-badge');
+            if (associationBadge) {
+                associationBadge.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                associationBadge.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            }
+
+            // Add animation to elements when they come into view
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.course-card, .benefit-item, .job-card, .association-description');
+                
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+
+            // Initialize opacity for animation
+            document.querySelectorAll('.course-card, .benefit-item, .job-card, .association-description').forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+
+            // Initial check and scroll listener
+            animateOnScroll();
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>
